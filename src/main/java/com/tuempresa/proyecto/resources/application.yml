@@ -1,0 +1,4 @@
+security:
+  jwt:
+    secret: my-secret-key
+    expiration: 3600000

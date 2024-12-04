@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Lista de Alumnos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Rut</th>
+                <th>Dirección</th>
+                <th>Materias</th>
+            </tr>
+        </thead>
+        <tbody id="alumnos"></tbody>
+    </table>
+</body>
+<script>
+    fetch('/api/alumnos')
+        .then(response => response.json())
+        .then(data => {
+            const tbody = document.getElementById('alumnos');
+            data.forEach(alumno => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${alumno.nombre}</td>
+                                 <td>${alumno.rut}</td>
+                                 <td>${alumno.direccion}</td>
+                                 <td>${alumno.materiaList.map(m => m.nombre).join(', ')}</td>`;
+                tbody.appendChild(row);
+            });
+        });
+</script>
+</html>
